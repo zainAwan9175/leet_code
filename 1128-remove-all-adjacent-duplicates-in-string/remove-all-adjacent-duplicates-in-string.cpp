@@ -15,12 +15,12 @@ public:
             }
           
         }
-        int j=0;
-        string res;
+     string res;
+       
         while(!st.empty()){
           res.push_back(st.top());
            st.pop();
-           j++;
+        
         }
         reverse(res.begin(),res.end());
         return res;
