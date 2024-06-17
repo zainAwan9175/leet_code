@@ -11,13 +11,13 @@ public:
         int f=0;
         int s=1;
         int t;
-        for(int i=1;i<=n;i++)
+        for(int i=2;i<=n;i++)
         {t=f+s;
         f=s;
         s=t;
 
         }
-        return f;
+        return t;
         
     }
 };
