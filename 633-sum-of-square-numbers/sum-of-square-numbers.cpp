@@ -6,7 +6,7 @@ public:
             return 0;
         }
         int left=0;
-       long long right = static_cast<long long>(sqrt(c));
+       long long right=sqrt(c);
        
        
         while (left <= right) {
