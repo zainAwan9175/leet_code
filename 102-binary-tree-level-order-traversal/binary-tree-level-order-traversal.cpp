@@ -11,14 +11,25 @@
  */
 class Solution {
 public:
-vector<vector<int>> main;
 
-queue<TreeNode*> Q;
 
 
 void levelorder(TreeNode* root)
 {
-    while(!Q.empty())
+   
+
+}
+    vector<vector<int>> levelOrder(TreeNode* root) {
+         vector<vector<int>> main;
+
+queue<TreeNode*> Q;
+        if(root==NULL)
+        {
+            return main;
+        }
+       
+Q.push(root);
+ while(!Q.empty())
     {
         int siz=Q.size();
         vector<int> iner;
@@ -43,14 +54,9 @@ void levelorder(TreeNode* root)
        
     }
 
-}
-    vector<vector<int>> levelOrder(TreeNode* root) {
-        if(root==NULL)
-        {
-            return main;
-        }
-        Q.push(root);
-       levelorder(root);
+
+
+       
        return main;
         
     }
