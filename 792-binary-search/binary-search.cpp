@@ -9,11 +9,11 @@ public:
             if(nums[mid]==target)
             {
                 return mid;
-            }
+            }else
             if(nums[mid]>target)
             {
                 right=mid-1;
-            }
+            }else
             if(nums[mid]<target)
             {
                 left=mid+1;
