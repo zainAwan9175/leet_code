@@ -7,25 +7,15 @@ public:
         for(int i=0;i<n;i++)
         {
              string s="";
-           for(int j=0;j<strs.size();j++)
+           for(int j=1;j<strs.size();j++)
            {
-               s=s+strs[j][i];
-           }
-           bool issort=true;
-           for(int k=1;k<s.size();k++)
-           {
-              if(!(s[k]>=s[k-1]))
-              {
-                issort=false;
+            if(strs[j][i]<strs[j-1][i])
+            {
+                count++;
                 break;
-              }
-                
-              
 
-           }
-           if(issort==false)
-           {
-            count++;
+            }
+             
            }
         }
         return count;
