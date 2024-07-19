@@ -23,7 +23,7 @@ public:
                        left=mid+1;
                   }
 
-                }else 
+                }else if(nums[mid]<nums[right])
                 {
                       if(nums[mid]<target&&target<=nums[right])
                   {
