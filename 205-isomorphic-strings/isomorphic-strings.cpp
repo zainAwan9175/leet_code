@@ -1,26 +1,24 @@
 class Solution {
 public:
     bool isIsomorphic(string s, string t) {
-        if (s.size() != t.size()) {
+        map<char,char> sTOt;
+             map<char,char> tTOs;
+        if(s.size()!=t.size())
+        {
             return false;
         }
-
-        map<char, char> sToT;
-        map<char, char> tToS;
-
-        for (int i = 0; i < s.size(); ++i) {
-            char sc = s[i];
-            char tc = t[i];
-
-            if ((sToT.count(sc) && sToT[sc] != tc) || 
-                (tToS.count(tc) && tToS[tc] != sc)) {
-                return false;
+        for(int i=0;i<s.size();i++)
+        {
+            char sc=s[i];
+            char tc=t[i];
+            if(sTOt.count(sc)&&sTOt[sc]!=tc || tTOs.count(tc)&&tTOs[tc]!=sc)
+            {
+            return false;
             }
+            sTOt[sc]=tc;
+            tTOs[tc]=sc;
 
-            sToT[sc] = tc;
-            tToS[tc] = sc;
         }
-
         return true;
     }
 };
