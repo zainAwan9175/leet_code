@@ -2,14 +2,14 @@ class Solution {
 public:
     vector<int> findDisappearedNumbers(vector<int>& nums) {
         vector<int>arr;
-       map<int,int>mp;
+      set<int> st;
        for(auto it:nums)
        {
-        mp[it]++;
+       st.insert(it);
        }
        for(int i=1;i<=nums.size();i++)
        {
-        if(!mp.count(i))
+        if(!st.count(i))
         {
             arr.push_back(i);
         }
