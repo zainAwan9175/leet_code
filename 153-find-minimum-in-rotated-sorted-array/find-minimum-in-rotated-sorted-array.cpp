@@ -13,7 +13,7 @@ public:
             {
                 left=mid+1;
             }
-            else
+            if(nums[mid]<=nums[right])
             {
                 right=mid-1;
             }
