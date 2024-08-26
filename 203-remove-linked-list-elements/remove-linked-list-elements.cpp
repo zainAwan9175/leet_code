@@ -25,7 +25,7 @@ while(  head!=NULL &&head->val==val)
         
            ListNode* temp=head;
        
-           while(temp!=NULL&& temp->next != NULL)
+           while(temp!=NULL &&temp->next!=NULL)
            {
           
              if(temp->next->val==val)
