@@ -1,174 +1,101 @@
 class node{
     public:
     int val;
-    node* next;
-    node (int d)
+    node *next;
+    node(int data)
     {
-        val=d;
+        val=data;
         next=NULL;
-
     }
-
-
 };
-
 class MyLinkedList {
 public:
- node* head;
+    node*head;
     MyLinkedList() {
-   head=NULL;
+        head=NULL;
     }
-    int leng()
-    {
-        if(head==NULL)
-        {
-            return 0;
-        }
+    int length(){
         int count=0;
-        node *temp=head;
-        while(temp!=NULL)
-        {
+        node*temp=head;
+        while(temp!=NULL){
             count++;
             temp=temp->next;
         }
-        return count;
-
+    return count;
+    }
+    int get(int k) {
+        int len=length();
+        if (head == NULL) return -1;
+        else if(len<k) return -1;
+        else{
+            int count=0;
+            node*temp=head;
+            while(count<k){
+                temp=temp->next;
+                count++;
+            }
+            if (temp == NULL) return -1;
+            return temp->val; 
+        }
     }
     
-    int get(int index) {
-   
-
-        if(head==NULL)
-        {
-            return -1;
+    void addAtHead(int value) {
+        node *new_node=new node(value);
+        new_node->next=head;
+        head=new_node;
+    }
+    
+    void addAtTail(int value) {
+       node *new_node=new node(value);
+        if(head==NULL){
+            head=new_node;
         }
         else{
-            node* temp=head;
-            int count=0;
-            while(temp!=NULL&&count<index)
-            {
-                count++;
+            node*temp=head;
+            while(temp->next!=NULL){
                 temp=temp->next;
             }
-            if(temp==NULL)
-            {
-                return -1;
-            }
-            else{
-                return temp->val;
-            }
-
-        }
-        
+            temp->next=new_node;
+        } 
     }
     
-    void addAtHead(int val) {
-        node* temp=new node(val);
-        if(head==NULL)
-        {
-            head=temp;
+    void addAtIndex(int k, int value) {
+        node*new_node=new node(value);
+        if(k==0){
+            addAtHead(value);
         }
         else{
-            temp->next=head;
-            head=temp;
+            int count=0;
+            node*temp=head;
+            while(temp!=NULL && count<k-1){
+                temp=temp->next;
+                count++;
+            }
+            if (temp == NULL) return;
+            node*right=temp->next;
+            temp->next=new_node;
+            new_node->next=right;
         }
-
-        
     }
     
-    void addAtTail(int val) {
-        node* temp=new node(val);
-        if(head==NULL)
-        {
-           head=temp;
+    void deleteAtIndex(int k) {
+        if (head == NULL) return;
+        else if(k==0){
+            node*del=head;
+            head=head->next;
+            delete del;
         }
         else{
-            node* tmp=head;
-            
-            while(tmp->next!=NULL)
-            {
-                tmp=tmp->next;
+            int count=0;
+            node*temp=head;
+            while(count<k-1){
+                temp=temp->next;
+                count++;
             }
-            tmp->next=temp;
-
-
+            if (temp == NULL || temp->next == NULL) return;
+            node*del=temp->next;
+            temp->next=temp->next->next;
+            delete del;
         }
-        
     }
-    
-    void addAtIndex(int index, int val) {
-    // If index is 0, insert at the head
-    if (index == 0) {
-        addAtHead(val);
-        return;
-    }
-
-    // Check if the index is within the valid range
-    int l = leng();
-    if (index > l) {
-        return; // Index is out of bounds
-    }
-
-    // Traverse to the node at position index - 1
-    node* temp = head;
-    for (int i = 0; i < index - 1; i++) {
-        if (temp == NULL) {
-            return; // If temp becomes NULL before reaching index - 1, exit
-        }
-        temp = temp->next;
-    }
-
-    // Create the new node to insert
-    node* newNode = new node(val);
-    
-    // Insert the new node at the given index
-    newNode->next = temp->next;
-    temp->next = newNode;
-}
-
-    
-    void deleteAtIndex(int index) {
-    // If the list is empty, do nothing
-    if (head == NULL) {
-        return;
-    }
-    
-    // If the index is 0, delete the head node
-    if (index == 0) {
-        node* temp = head;
-        head = head->next; // Move the head to the next node
-        delete temp;       // Free the old head node
-        return;
-    }
-    
-    // Traverse to the node just before the one to be deleted
-    node* prev = head;
-    for (int i = 0; i < index - 1; i++) {
-        if (prev->next == NULL) {
-            return; // If we reach the end before index-1, exit (invalid index)
-        }
-        prev = prev->next;
-    }
-    
-    // If the node to be deleted is not valid (i.e., the next node is NULL), return
-    if (prev->next == NULL) {
-        return;
-    }
-    
-    // Delete the node at the given index
-    node* toDelete = prev->next;
-    prev->next = toDelete->next; // Bypass the node to delete
-    delete toDelete;             // Free the memory of the deleted node
-}
-
 };
-
-/**
- * Your MyLinkedList object will be instantiated and called as such:
- * MyLinkedList* obj = new MyLinkedList();
- * int param_1 = obj->get(index);
- * obj->addAtHead(val);
- * obj->addAtTail(val);
- * obj->addAtIndex(index,val);
- * obj->deleteAtIndex(index);
- */
