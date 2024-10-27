@@ -19,23 +19,8 @@ public:
                 {
                     return sum;
                 }
-                // while(left<right)
-                // {
-                //     if(nums[left]==nums[left+1])
-                //      {
-                //         left++;
+             
 
-                //      }else 
-                //      if(nums[right]==nums[right-1])
-                //      {
-                //           right--;
-                //      }
-                //      else{
-                //         break;
-                //      }
-                
-
-                // }
 
                 if(sum>target)
                 {
