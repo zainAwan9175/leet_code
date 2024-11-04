@@ -12,36 +12,44 @@
 class Solution {
 public:
     vector<vector<int>> levelOrderBottom(TreeNode* root) {
-        vector<vector<int>> main;
-        queue<TreeNode* > q;
-        if(root==NULL)
-        {
-            return main;
-        }
-        q.push(root);
-        while(!q.empty())
-        {
-            vector<int> iner;
-            int siz=q.size();
-            for(int i=0;i<siz;i++)
-        {
-            TreeNode* f=q.front();
-                iner.push_back(f->val);
-            if(f->left!=NULL)
-            {
-                q.push(f->left);
-            }
-             if(f->right!=NULL)
-            {
-                q.push(f->right);
-            }
-            q.pop();
-        
-        }
-        main.push_back(iner);
-        }
-        reverse(main.begin(),main.end());
-
+     vector<vector<int>> main;
+      queue<TreeNode*>Q;
+      if(root==NULL)
+      {
         return main;
+      }
+      Q.push(root);
+      while(!Q.empty())
+      {
+int size=Q.size();
+     vector<int> inner;
+for(int i=0;i<size;i++)
+{
+    
+        TreeNode* current=Q.front();
+        inner.push_back(current->val);
+   
+
+        if(current->left!=NULL)
+        {
+                Q.push(current->left);
+        }
+         if(current->right!=NULL)
+        {
+                Q.push(current->right);
+        }
+        Q.pop();
+}
+main.push_back(inner);
+       
+
+
+
+      }
+reverse(main.begin(),main.end());
+
+
+return main;
+       
     }
 };
