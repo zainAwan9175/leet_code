@@ -1,33 +1,36 @@
 class MyCircularQueue {
 public: 
+
 int *arr;
 int size=0;
 int l=0;
-int front=0;
 int rear=-1;
+int front=0;
 
     MyCircularQueue(int k) {
-       arr=new int[k];
-       l=k;
-        
-        
-    }
+   
+        arr=new int[k];
+        l=k; 
+
+    }    
     
-    bool enQueue(int value) {
-        if(size==l)
-        {
-            return false;
-        }
-        else{
-            rear=(rear+1)%l;
-            arr[rear]=value;
-            size++;
-            return true;
-        }
-        
+    bool enQueue(int val) {
+      
+      if(size==l)
+      {
+        return false;
+      }
+
+      rear=(rear+1)%l;
+      arr[rear]=val;
+      size++;
+      return true;
+
+
     }
     
     bool deQueue() {
+
         if(size==0)
         {
             return false;
@@ -35,37 +38,39 @@ int rear=-1;
         front=(front+1)%l;
         size--;
         return true;
-      
     }
     
     int Front() {
         if(size==0)
         {
             return -1;
-        }
+        } 
         return arr[front];
       
-        
-    }
+      
+     }
     
     int Rear() {
-        if(size==0)
-        {
-            return -1;
-        }
-        return arr[rear];
+
+      if(size==0)
+      {
+        return -1;
+      } 
+      return arr[rear];
       
                      
     }
     
     bool isEmpty() {
         return size==0;
+  
      
         
     }
     
     bool isFull() {
-         return size==l;
+        return size==l;
+     
   
 
         
