@@ -1,7 +1,7 @@
 class Solution {
 public:
     void moveZeroes(vector<int>& nums) {
-        int nonZeroPos=0;
+ int nonZeroPos=0;
 
         for(int i=0;i<nums.size();i++)
         {
@@ -9,6 +9,7 @@ public:
             {
                 nums[nonZeroPos]=nums[i];
                 nonZeroPos++;
+
             }
         }
 
@@ -16,6 +17,6 @@ public:
         {
             nums[i]=0;
         }
-
+     
     }
 };
