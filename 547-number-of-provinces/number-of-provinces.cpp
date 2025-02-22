@@ -1,16 +1,14 @@
 class Solution {
 public:
-void dfs(unordered_map<int,vector<int>> &adj,int u,vector<bool> &visited)
+void dfs(vector<vector<int>>& isConnected,int u,vector<bool> &visited,int n)
 {
     visited[u]=true;
-    for(auto it:adj[u])
+    for(int v=0;v<n;v++)
     {
-         if(!visited[it])
-          {
-              dfs(adj,it,visited);
-       
-          }
-
+      if(!visited[v]&&isConnected[u][v]==1)
+      {
+         dfs(isConnected,v,visited,n);
+      }
     }
 }
     int findCircleNum(vector<vector<int>>& isConnected) {
@@ -37,7 +35,7 @@ void dfs(unordered_map<int,vector<int>> &adj,int u,vector<bool> &visited)
           {
             
             count++;
-              dfs(adj,i,visited);
+              dfs(isConnected,i,visited,n);
           }
         }
 
