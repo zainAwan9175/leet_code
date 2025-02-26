@@ -1,36 +1,28 @@
 class Solution {
 public:
-bool bfs(unordered_map<int, vector<int>> &adj,vector<int> &indegree,int n)
+bool checkcycle( unordered_map<int, vector<int>> &adj, vector<bool> &inRecursion,vector<bool> &visited,int u)
 {
-   queue<int> que;
-   int count=0;
-     for(int i=0;i<n;i++)
-     {
-        if(indegree[i]==0)
-        {
-            que.push(i);
-        }
-     }
-
-     while(!que.empty())
-     {
-         int u=que.front();
-         que.pop();
-          count++;
-         for(auto it:adj[u])
-         {
-            indegree[it]--;
-            if(indegree[it]==0)
-            {
-             que.push(it);
-               
-            }
-         }
-     }
-     return count==n;
+    visited[u]=true;
+    inRecursion[u]=true;
+    
+    for(auto it:adj[u])
+    {
+          if(!visited[it]&&checkcycle(adj,inRecursion,visited,it))
+          {
+            return true;
+          }
+          else if(inRecursion[it]==true)
+          {
+         
+            return true;
+          }
+    }
+       inRecursion[u]=false;
+                   return false;
 }
     bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
-        vector<int> indegree(numCourses,0);
+        vector<bool> inRecursion(numCourses,false);
+                vector<bool> visited(numCourses,false);
         unordered_map<int, vector<int>> adj;
 
         for(auto it :prerequisites)
@@ -38,11 +30,17 @@ bool bfs(unordered_map<int, vector<int>> &adj,vector<int> &indegree,int n)
             int a=it[0];
             int b=it[1];
             adj[b].push_back(a);
-            indegree[a]++;
+      
 
         }
-
-       return bfs(adj,indegree,numCourses);
+    for(int i=0;i<numCourses;i++)
+    {
+        if(!visited[i]&&checkcycle(adj,inRecursion,visited,i))
+        {
+            return false;
+        }
+    }
+       return true;
         
     }
 };
