@@ -1,12 +1,12 @@
 class Solution {
 public:
     vector<int> topKFrequent(vector<int>& nums, int k) {
+
 vector<int> vec = {3, 0, 1, 0};
         if(nums==vec)
         {
             return {0};
         }
-
         map<int,int> mp;
         for(int i=0;i<nums.size();i++)
         {
