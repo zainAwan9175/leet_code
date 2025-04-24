@@ -1,81 +1,30 @@
 class Solution {
 public:
-bool check_box(int row,int re,int col, int ce,vector<vector<char>>& board)
-{
-            unordered_set<int> s;
-    for(int i=row;i<=re;i++)
-    {
-        for(int j=col;j<=ce;j++)
-        {
-             if(board[i][j]=='.')continue;
 
-            if(s.find(board[i][j]) != s.end())
+
+    bool isValidSudoku(vector<vector<char>>& board) {
+    unordered_set<string> st;
+    for(int i=0;i<9;i++)
+    {
+        for(int j=0;j<9;j++)
+        {
+            if(board[i][j]=='.')continue;
+            string value=string(1,board[i][j]);
+            string row=value+"row"+to_string(i);
+            string col=value+"col"+to_string(j);
+            string box=value+"box"+to_string(i/3)+"_"+to_string(j/3);
+
+            if(st.find(row)!=st.end()||st.find(col)!=st.end()||st.find(box)!=st.end())
             {
                 return false;
             }
             else{
-                s.insert(board[i][j]);
+                st.insert(row);
+                st.insert(col);
+                st.insert(box);
             }
-
         }
     }
     return true;
-}
-
-    bool isValidSudoku(vector<vector<char>>& board) {
-     for(int row=0;row<9;row++)
-     {
-        unordered_set<int> s;
-        for(int col=0;col<9;col++)
-        {
-            if(board[row][col]=='.')continue;
-
-            if(s.find(board[row][col]) != s.end())
-            {
-                return false;
-            }
-            else{
-                s.insert(board[row][col]);
-            }
-        }
-     }
-
-     for(int col=0;col<9;col++)
-     {
-        unordered_set<int> s;
-        for(int row=0;row<9;row++)
-        {
-            if(board[row][col]=='.')continue;
-
-            if(s.find(board[row][col]) != s.end())
-            {
-                return false;
-            }
-            else{
-                s.insert(board[row][col]);
-            }
-        }
-     }
-
-
-
-
-   for(int row=0;row<9;row=row+3)
-     {
-        
-        for(int col=0;col<9;col=col+3)
-        {
-          int re=row+2;
-          int ce=col+2;
-          if(!check_box(row,re,col,ce,board))
-          {
-            return false; 
-
-          }
-        }
-     }
-
-
-   return true;
     }
 };
