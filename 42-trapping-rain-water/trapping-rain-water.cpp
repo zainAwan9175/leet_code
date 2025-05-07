@@ -7,43 +7,33 @@ public:
     int trap(vector<int>& height) {
 
 
-int left_h=0;
-int right_h=0;
-
-
-
 int l=0;
 int r=height.size()-1;
+int lh=0;
+int rh=0;
 int ans=0;
 while(l<r)
 {
-    if(height[l]<=height[r])
+  if(height[l]<=height[r])
+  {
+      if(height[l]<lh)
     {
-        if(left_h<height[l])
-        {
-            left_h=height[l];
-            
-        }
-        else{
-            ans=ans+(left_h-height[l]);
-        }
-        l++;
-
+       ans=ans+(lh-height[l]);
     }else{
-        if(right_h<height[r])
-        {
-            right_h=height[r];
-            
-        }
-        else{
-            ans=ans+(right_h-height[r]);
-        }
-        r--;
-
-    }
-}
-return ans;
-
+        lh=height[l];
         
+    }
+    l++;
+  }else{
+    if(height[r]<rh)
+    {
+        ans=ans+(rh-height[r]);
+    }else{
+        rh=height[r];
+    }
+    r--;
+  }
+}
+        return ans;
     }
 };
