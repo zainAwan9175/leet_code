@@ -1,32 +1,38 @@
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-        int left=0;
-        int right=0;
-        int ans=0;
-        set<char> vec;
-       
-        while(left<s.length()&&right<s.length())
+ int l=0;
+ int r=1;
+ int max_string=0;
+ string cur="";
+ for(int i=0;i<s.size();i++)
+ {
+    if(cur.find(s[i]) != string::npos)
+    {
+        int cur_size=cur.size();
+        max_string=max(max_string,cur_size);
+        cur="";
+        int destination=s[i];
+        i--;
+        while(i>=0)
         {
-            if(vec.count(s[right]))
+            if(s[i]==destination)
             {
-                while(vec.count(s[right]))
-                {
-                    vec.erase(s[left]);
-                    left++;
-                }
+                i++;
+                break;
             }
-            else{
-                vec.insert(s[right]);
-                int n=vec.size();
-                ans=max(n,ans);
-                
-                right++;
-                    
-                
-            }
+            i--;
         }
-        return ans;
+        cur=cur+s[i];
+    }
+    else{
+             cur=cur+s[i];
+    }
+ }
+        int cur_size=cur.size();
+        max_string=max(max_string,cur_size);
+        return max_string;
+
         
     }
 };
