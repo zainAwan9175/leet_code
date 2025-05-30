@@ -1,43 +1,39 @@
 class Solution {
 public:
     string minWindow(string s, string t) {
-        if (s.size() < t.size()) return "";
-
+        int count = t.size();
         unordered_map<char, int> mp;
+        
         for (char c : t) {
             mp[c]++;
         }
 
-        int count = t.size(); // Number of characters we need to match
-        int left = 0, right = 0;
-        int minLen = INT_MAX;
+        int l = 0, r = 0;
+        int min_l = INT_MAX;
         int start = 0;
 
-        while (right < s.size()) {
-            // If s[right] is needed
-            if (mp[s[right]] > 0) {
+        while (r < s.size()) {
+            if (mp[s[r]] > 0) {
                 count--;
             }
+            mp[s[r]]--;
 
-            mp[s[right]]--; // Always decrement
-            right++;
-
-            // When all characters are matched
             while (count == 0) {
-                if (right - left < minLen) {
-                    minLen = right - left;
-                    start = left;
+                if ((r - l + 1) < min_l) {
+                    min_l = r - l + 1;
+                    start = l; // ⬅️ Store the starting index
                 }
 
-                // Shrink from left
-                mp[s[left]]++;
-                if (mp[s[left]] > 0) {
-                    count++; // We need this character again
+                mp[s[l]]++;
+                if (mp[s[l]] > 0) {
+                    count++;
                 }
-                left++;
+                l++;
             }
+
+            r++;
         }
 
-        return (minLen == INT_MAX) ? "" : s.substr(start, minLen);
+        return min_l == INT_MAX ? "" : s.substr(start, min_l);
     }
 };
