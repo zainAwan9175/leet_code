@@ -6,27 +6,53 @@
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
+// class Solution {
+// public:
+//     bool hasCycle(ListNode *head) {
+//         vector<ListNode *> visited;
+//         ListNode *temp=head;
+
+
+//         while(temp!=NULL)
+//         {
+//             for(auto it:visited)
+//             {
+//                 if(it==temp)
+//                 {
+//                     return true;
+//                 }
+//             }
+//             visited.push_back(temp);
+//             temp=temp->next;
+
+//         }
+
+//         return false;
+//     }
+// };
+
+
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
-        vector<ListNode *> visited;
-        ListNode *temp=head;
+      if(head==NULL||head->next==NULL)
+      {
+          return false;
+      }
+       ListNode *fast=head->next;
+       ListNode *slow=head;
 
 
-        while(temp!=NULL)
+       while(slow!=fast)
+       {
+        if(fast->next==NULL||fast->next->next==NULL)
         {
-            for(auto it:visited)
-            {
-                if(it==temp)
-                {
-                    return true;
-                }
-            }
-            visited.push_back(temp);
-            temp=temp->next;
-
+            return false;
         }
+        slow=slow->next;
+        fast=fast->next->next;
+       }
 
-        return false;
+        return true;;
     }
 };
