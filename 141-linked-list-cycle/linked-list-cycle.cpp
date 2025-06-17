@@ -9,22 +9,24 @@
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
-        if(head==NULL)
+        vector<ListNode *> visited;
+        ListNode *temp=head;
+
+
+        while(temp!=NULL)
         {
-            return false;
+            for(auto it:visited)
+            {
+                if(it==temp)
+                {
+                    return true;
+                }
+            }
+            visited.push_back(temp);
+            temp=temp->next;
+
         }
-      set<ListNode*> st;
-         st.insert(head);
-        head=head->next;
-      while(head!=NULL)
-      {
-      if(st.count(head))
-      {
-        return true;
-        }
-       st.insert(head);
-        head=head->next;
-      }
+
         return false;
     }
 };
