@@ -11,45 +11,30 @@
 class Solution {
 public:
     void reorderList(ListNode* head) {
-       ListNode* temp=head;
-       stack<int> st;
-       queue<int> qu;
-int count =0;
-        while(temp)
+        queue<int> qu;
+        stack<int> st;
+        ListNode* temp=head;
+        while(temp!=NULL)
         {
-            count++;
-             temp=temp->next;
-        }
-        int firsthalf=ceil(count/2.0);
-        int secondhalf=count-firsthalf;
-   
-        temp=head;
-    for(int i=0;i<firsthalf;i++)
-    {
         qu.push(temp->val);
-        temp=temp->next;
-    }
-      for(int i=0;i<secondhalf;i++)
-    {
         st.push(temp->val);
-        temp=temp->next;
-    }
-      temp=head;
-      while(temp)
-      {
+        temp = temp->next;
+        }
+        temp=head;
+      
+         while(temp!=NULL)
+         {
             temp->val=qu.front();
             qu.pop();
+            if(temp->next!=NULL)
+            {
+                temp=temp->next;
+                temp->val=st.top();
+                st.pop();
+            }
+
             temp=temp->next;
-        if(temp!=NULL)
-        {
-           temp->val=st.top();
-           st.pop();
-           temp=temp->next;
-        }
-      }
-
-
-      
+         }
         
     }
 };
