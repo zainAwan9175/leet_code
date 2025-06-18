@@ -28,15 +28,20 @@ public:
             return newHead;
         }
 
-for(int i=1;i<pos;i++)
-{
-    temp=temp->next;
-}
- ListNode* todel=temp->next;
+count=0;
+           while(temp!=NULL)
+        {
+           count++;
+         if(count==pos)
+         {
+             ListNode* nodeToDelete = temp->next;
+            temp->next=temp->next->next;
+       return head;
+         }else{
+            temp=temp->next;
+         }
 
-temp->next=temp->next->next;
- delete todel;
-
+        }
         return head;
     }
 };
