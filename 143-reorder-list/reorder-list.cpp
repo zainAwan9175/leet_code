@@ -1,43 +1,53 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
 class Solution {
 public:
     void reorderList(ListNode* head) {
+        // first find mid
         if (!head || !head->next) return;
-
-        // Step 1: Find the middle using slow & fast pointers
-        ListNode* slow = head;
-        ListNode* fast = head;
-
-        while (fast && fast->next) {  // ✅ Correct condition
-            slow = slow->next;
-            fast = fast->next->next;
+        ListNode* slow=head;
+        ListNode* fast=head;
+        while(fast&&fast->next)
+        {
+            slow=slow->next;
+            fast=fast->next->next;
         }
 
-        // Step 2: Reverse the second half of the list
-        ListNode* cur = slow->next;
-        slow->next = NULL;
-        ListNode* pre = NULL;
-        ListNode* next = NULL;
+        ListNode* cur=slow->next;
+        slow->next=NULL;
+        ListNode* prev=NULL;
+        ListNode* next=NULL;
+        while(cur)
+        {
+            next=cur->next;
+            cur->next=prev;
+            prev=cur;
+            cur=next;
 
-        while (cur) {
-            next = cur->next;
-            cur->next = pre;
-            pre = cur;
-            cur = next;  // ✅ Correct update
         }
+          ListNode* list1=head;
+            ListNode* list2=prev;
+            while( list2)
+            {
+                  ListNode* first=list1->next;
+                    ListNode* second=list2->next;
 
-        // Step 3: Merge the two halves
-        ListNode* first = head;
-        ListNode* second = pre;
+                    list1->next=list2;
+                    list2->next=first;
+                    list1=first;
+                    list2=second;
 
-        while (second) {
-            ListNode* temp1 = first->next;
-            ListNode* temp2 = second->next;
 
-            first->next = second;
-            second->next = temp1;
+            }
 
-            first = temp1;
-            second = temp2;
-        }
+        
     }
 };
