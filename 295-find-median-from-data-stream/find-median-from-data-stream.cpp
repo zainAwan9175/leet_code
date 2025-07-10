@@ -7,17 +7,25 @@ priority_queue<int,vector<int>,greater<int>> min_q;
     }
     
     void addNum(int num) {
-             max_q.push(num);
+        if(max_q.empty()||num<max_q.top())
+        {
+                   max_q.push(num);
+        }
+        else{
+            min_q.push(num);
+        }
 
-        // Move largest from max_q to min_q to keep order property
-        min_q.push(max_q.top());
-        max_q.pop();
-
-        // Balance the sizes
-        if (min_q.size() > max_q.size()) {
+        if(max_q.size()>min_q.size()+1)
+        {
+            int n=max_q.top();
+            max_q.pop();
+            min_q.push(n);
+        }else if(min_q.size()>max_q.size())
+        {
             max_q.push(min_q.top());
             min_q.pop();
         }
+        
         
     }
     
