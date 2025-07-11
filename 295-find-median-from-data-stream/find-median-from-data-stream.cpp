@@ -7,14 +7,22 @@ priority_queue<int,vector<int>,greater<int>> min_q;
     }
     
     void addNum(int num) {
-        max_q.push(num);   
-        min_q.push(max_q.top());
-        max_q.pop();    
-        if(min_q.size()>max_q.size())
-        {
-            max_q.push(min_q.top());
-            min_q.pop();
-        }
+       if(max_q.empty()||num<max_q.top())
+       {
+        max_q.push(num);
+       }else{
+        min_q.push(num);
+       }
+
+       if(max_q.size()>min_q.size()+1)
+       {
+          min_q.push(max_q.top());
+          max_q.pop();
+       }else if(min_q.size()>max_q.size())
+       {
+          max_q.push(min_q.top());
+          min_q.pop();
+       }
     }
     
     double findMedian() {
