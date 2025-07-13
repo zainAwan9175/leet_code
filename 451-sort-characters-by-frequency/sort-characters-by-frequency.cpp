@@ -1,41 +1,33 @@
 class Solution {
 public:
-  typedef pair<char,int> p;
-        struct lambda{
-              bool operator()(p &p1,p &p2)
-      {
-        return p1.second<p2.second;
-      }
-
-        };
     string frequencySort(string s) {
+        unordered_map<char,int> mp;
+        priority_queue<pair<int,char>>q;
 
-      
-    
-        priority_queue<p,vector<p>,lambda>q;
-        
-unordered_map<char,int> mp;
         for(auto it:s)
         {
             mp[it]++;
 
-
         }
-
         for(auto it:mp)
         {
-            q.push({it.first,it.second});
+            pair <int, char> p={it.second,it.first};
+            q.push(p);
         }
-        
 
-        string res="";
+        string ans="";
         while(!q.empty())
         {
-            p cur=q.top();
+           
+                 ans=ans+string(q.top().first,q.top().second);
+            
+            
             q.pop();
-            res+=string(cur.second,cur.first);
         }
 
-        return res;
+        return ans;
+    
+
+
     }
 };
