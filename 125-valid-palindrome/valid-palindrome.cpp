@@ -14,16 +14,23 @@ public:
             {
                 r--;
                 continue;
-             }
+            }
 
-             if(tolower(s[l])!=tolower(s[r]))
-             {
+            if(isupper(s[l]))
+            {
+                s[l]=tolower(s[l]);
+            }
+              if(isupper(s[r]))
+            {
+                s[r]=tolower(s[r]);
+            }
+
+            if(s[l]!=s[r])
+            {
                 return false;
-             }
-             else{
-                l++;
-                r--;
-             }
+            }
+            l++;
+            r--;
         }
         return true;
     }
